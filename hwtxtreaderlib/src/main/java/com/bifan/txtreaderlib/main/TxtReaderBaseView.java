@@ -12,7 +12,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -523,15 +522,11 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
             if (isPagePre()  && velocityX > MaxVelocityX) {
                 if (!isFirstPage()) {
                     startPagePreAnimation();
-                } else {
-                    Toast.makeText(getContext(), "没有上一页了", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             } else if (isPageNext() && velocityX < -MaxVelocityX) {
                 if (!isLastPage()) {
                     startPageNextAnimation();
-                }else {
-                    Toast.makeText(getContext(), "没有下一页了", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
