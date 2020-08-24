@@ -73,6 +73,12 @@ public class ParagraphData implements IParagraphData {
     }
 
     @Override
+    public void removeLast() {
+        paragraph.remove(paragraph.size() - 1);
+        charIndex.remove(charIndex.size() - 1);
+    }
+
+    @Override
     public String getParagraphStrFromStart(int ParaIndex, int CharIndex) {
         String S = getParagraphStr(ParaIndex) + "";
         if (CharIndex < 0) CharIndex = 0;

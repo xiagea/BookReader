@@ -12,6 +12,7 @@ public interface IParagraphData {
     int findParagraphIndexByCharIndex(int CharIndex);
     int getParaStartCharIndex(int ParaIndex);
     String getParagraphStr(int ParaIndex);
+    void removeLast();
     /**
      * @param ParaIndex 段落位置
      * @param CharIndex 字符位置

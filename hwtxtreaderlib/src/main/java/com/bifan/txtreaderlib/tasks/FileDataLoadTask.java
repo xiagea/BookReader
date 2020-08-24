@@ -77,6 +77,10 @@ public class FileDataLoadTask implements ITxtTask {
                     }
                 }
                 initChapterEndIndex(chapters, paragraphData.getParagraphNum());
+                String s = paragraphData.getParagraphStr(paragraphData.getParagraphNum() - 1);
+                if (s.equals("\f")) {
+                    paragraphData.removeLast();
+                }
                 return true;
             } catch (IOException e) {
                 ELogger.log(tag, "IOException:" + e.toString());
