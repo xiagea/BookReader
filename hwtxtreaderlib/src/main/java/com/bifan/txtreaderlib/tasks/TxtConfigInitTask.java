@@ -1,9 +1,7 @@
 package com.bifan.txtreaderlib.tasks;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 
 import com.bifan.txtreaderlib.interfaces.ILoadListener;
 import com.bifan.txtreaderlib.interfaces.ITxtTask;
@@ -101,13 +99,13 @@ public class TxtConfigInitTask implements ITxtTask {
         paintContext.sliderPaint.setColor(txtConfig.SliderColor);
         paintContext.sliderPaint.setAntiAlias(true);
         paintContext.textPaint.setFakeBoldText(txtConfig.Bold);
-        if (txtConfig.VerticalPageMode) {
-            AssetManager mgr = context.getAssets();
-            Typeface tf = Typeface.createFromAsset(mgr, "fonts/text_style.TTF");
-            paintContext.textPaint.setTypeface(tf);
-        } else {
+//        if (txtConfig.VerticalPageMode) {
+//            AssetManager mgr = context.getAssets();
+//            Typeface tf = Typeface.createFromAsset(mgr, "fonts/text_style.TTF");
+//            paintContext.textPaint.setTypeface(tf);
+//        } else {
             paintContext.textPaint.setTypeface(null);
-        }
+//        }
     }
 
     private void initPageParam(TxtReaderContext readerContext) {
