@@ -1,6 +1,7 @@
 package com.bifan.txtreaderlib.main;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Path;
@@ -8,6 +9,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -1265,10 +1267,12 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
     }
 
     private void initReaderContext() {
-        PageChangeMinMoveDistance = getWidth() / 5;
+        int width = getWidth() == 0 ? getScreenWidth() : getWidth();
+        int height = getHeight() == 0 ? getScreenHeight() : getHeight();
+        PageChangeMinMoveDistance = width / 5;
         PageParam param = new PageParam();
-        param.PageWidth = getWidth();
-        param.PageHeight = getHeight();
+        param.PageWidth = width;
+        param.PageHeight = height;
         readerContext.setPageParam(param);
     }
 
@@ -1395,5 +1399,14 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
         postInvalidate();
     }
 
+    public int getScreenWidth() {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        return dm.widthPixels;
+    }
+
+    public int getScreenHeight() {
+        DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
+        return dm.heightPixels;
+    }
 
 }

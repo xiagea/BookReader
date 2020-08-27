@@ -1,5 +1,7 @@
 package com.bifan.txtreaderlib.tasks;
 
+import android.text.TextUtils;
+
 import com.bifan.txtreaderlib.bean.Chapter;
 import com.bifan.txtreaderlib.bean.TxtMsg;
 import com.bifan.txtreaderlib.interfaces.IChapter;
@@ -78,7 +80,7 @@ public class FileDataLoadTask implements ITxtTask {
                 }
                 initChapterEndIndex(chapters, paragraphData.getParagraphNum());
                 String s = paragraphData.getParagraphStr(paragraphData.getParagraphNum() - 1);
-                if (s.equals("\f")) {
+                if (!TextUtils.isEmpty(s) && s.equals("\f")) {
                     paragraphData.removeLast();
                 }
                 return true;
