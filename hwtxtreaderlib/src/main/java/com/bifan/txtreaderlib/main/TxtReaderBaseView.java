@@ -35,7 +35,6 @@ import com.bifan.txtreaderlib.interfaces.ITxtTask;
 import com.bifan.txtreaderlib.tasks.BitmapProduceTask;
 import com.bifan.txtreaderlib.tasks.TextLoader;
 import com.bifan.txtreaderlib.tasks.TxtFileLoader;
-import com.bifan.txtreaderlib.ui.HwTxtPlayActivity;
 import com.bifan.txtreaderlib.utils.DisPlayUtil;
 import com.bifan.txtreaderlib.utils.ELogger;
 
@@ -523,9 +522,6 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         float MaxVelocityX = 1000;
         float MaxVelocityY = 3500;
-        if (isFirstPage() && Math.abs(velocityY) > MaxVelocityY) {
-            toast("左滑查看下一页");
-        }
         if (CurrentMode == Mode.Normal) {//正常情况下快速滑动，执行翻页动作
             if (isPagePre()  && velocityX > MaxVelocityX) {
                 if (!isFirstPage()) {
@@ -537,6 +533,8 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
                     startPageNextAnimation();
                 }
                 return true;
+            } else if (isFirstPage() && Math.abs(velocityY) > MaxVelocityY) {
+                toast("左滑查看下一页");
             }
         }
         return false;
@@ -1418,10 +1416,11 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
     private Toast t;
 
     protected void toast(final String msg) {
-        if (t != null) {
-            t.cancel();
+        if (t == null) {
+            t = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
+        } else {
+            t.setText(msg);
         }
-        t = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
         t.show();
     }
 
