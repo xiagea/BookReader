@@ -14,6 +14,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -34,6 +35,7 @@ import com.bifan.txtreaderlib.interfaces.ITxtTask;
 import com.bifan.txtreaderlib.tasks.BitmapProduceTask;
 import com.bifan.txtreaderlib.tasks.TextLoader;
 import com.bifan.txtreaderlib.tasks.TxtFileLoader;
+import com.bifan.txtreaderlib.ui.HwTxtPlayActivity;
 import com.bifan.txtreaderlib.utils.DisPlayUtil;
 import com.bifan.txtreaderlib.utils.ELogger;
 
@@ -520,6 +522,10 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         float MaxVelocityX = 1000;
+        float MaxVelocityY = 3500;
+        if (isFirstPage() && Math.abs(velocityY) > MaxVelocityY) {
+            toast("左滑查看下一页");
+        }
         if (CurrentMode == Mode.Normal) {//正常情况下快速滑动，执行翻页动作
             if (isPagePre()  && velocityX > MaxVelocityX) {
                 if (!isFirstPage()) {
@@ -1407,6 +1413,16 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
     public int getScreenHeight() {
         DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
         return dm.heightPixels;
+    }
+
+    private Toast t;
+
+    protected void toast(final String msg) {
+        if (t != null) {
+            t.cancel();
+        }
+        t = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
+        t.show();
     }
 
 }
