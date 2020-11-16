@@ -112,6 +112,12 @@ public class TxtConfigInitTask implements ITxtTask {
         PageParam param = readerContext.getPageParam();
         int lineHeight = readerContext.getTxtConfig().textSize + param.LinePadding;
         param.LineHeight = lineHeight;
+        param.PaddingLeft = TxtConfig.Page_PaddingLeft;
+        param.LinePadding = TxtConfig.Page_LinePadding;
+        param.PaddingRight = TxtConfig.Page_PaddingRight;
+        param.PaddingTop = TxtConfig.Page_PaddingTop;
+        param.PaddingBottom = TxtConfig.Page_PaddingBottom;
+        param.ParagraphMargin = TxtConfig.Page_Paragraph_margin;
         if (!readerContext.getTxtConfig().VerticalPageMode) {
             param.LineWidth = param.PageWidth - param.PaddingLeft - param.PaddingRight;
             param.LineHeight = lineHeight;
@@ -121,12 +127,6 @@ public class TxtConfigInitTask implements ITxtTask {
             param.LineHeight = param.PageHeight - param.PaddingTop - param.PaddingBottom;
             param.PageLineNum = (param.PageWidth - param.PaddingLeft - param.PaddingRight - readerContext.getTxtConfig().textSize - 2) / lineHeight + 1;
         }
-        param.PaddingLeft = TxtConfig.Page_PaddingLeft;
-        param.LinePadding = TxtConfig.Page_LinePadding;
-        param.PaddingRight = TxtConfig.Page_PaddingRight;
-        param.PaddingTop = TxtConfig.Page_PaddingTop;
-        param.PaddingBottom = TxtConfig.Page_PaddingBottom;
-        param.ParagraphMargin = TxtConfig.Page_Paragraph_margin;
     }
 
 
